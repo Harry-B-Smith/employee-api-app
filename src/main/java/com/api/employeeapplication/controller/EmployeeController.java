@@ -1,13 +1,12 @@
 package com.api.employeeapplication.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.api.employeeapplication.entity.Employee;
 import com.api.employeeapplication.service.EmployeeService;
@@ -32,6 +31,10 @@ public class EmployeeController {
 		return employeeService.getAllEmployees();
 	}
 
-	
+	@GetMapping("/{id}")
+	public ResponseEntity<Employee> getEmployeeById(@PathVariable Long id) {
+		Optional<Employee> emp = employeeService.findById(id);
+		return emp.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+	}
 
 }
