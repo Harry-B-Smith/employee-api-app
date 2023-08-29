@@ -37,4 +37,19 @@ public class EmployeeController {
 		return emp.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
 	}
 
+	@PostMapping
+	public Employee createEmployee(@RequestBody Employee employee) {
+		return employeeService.save(employee);
+	}
+
+	@PutMapping("/{id}")
+	public ResponseEntity<Employee> updateEmployee(@PathVariable Long id, @RequestBody Employee newEmployee) {
+		if (!employeeService.existsById(id)) {
+			return ResponseEntity.notFound().build();
+		}
+		newEmployee.setId(id);
+		Employee updatedEmployee = employeeService.save(newEmployee);
+		return ResponseEntity.ok(updatedEmployee);
+	}
+
 }

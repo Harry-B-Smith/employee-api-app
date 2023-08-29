@@ -28,4 +28,12 @@ public class EmployeeService {
     public Optional<Employee> findById(Long id) {
 		return employeeRepo.findById(id);
     }
+
+	public Employee save(Employee employee) {
+		return employeeRepo.save(employee);
+	}
+
+	public boolean existsById(Long id) {
+		return employeeRepo.existsById(id) ? true : false;
+	}
 }
