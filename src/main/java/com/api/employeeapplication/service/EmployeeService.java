@@ -36,4 +36,8 @@ public class EmployeeService {
 	public boolean existsById(Long id) {
 		return employeeRepo.existsById(id) ? true : false;
 	}
+
+	public void deleteById(Long id) {
+		employeeRepo.deleteById(id);
+	}
 }

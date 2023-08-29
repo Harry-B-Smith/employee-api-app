@@ -3,6 +3,7 @@ package com.api.employeeapplication.controller;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -50,6 +51,16 @@ public class EmployeeController {
 		newEmployee.setId(id);
 		Employee updatedEmployee = employeeService.save(newEmployee);
 		return ResponseEntity.ok(updatedEmployee);
+	}
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> deleteEmployee(@PathVariable Long id) {
+		if(!employeeService.existsById(id)) {
+			return ResponseEntity.notFound().build();
+		}
+
+		employeeService.deleteById(id);
+		return ResponseEntity.noContent().build();
 	}
 
 }
