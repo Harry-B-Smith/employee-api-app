@@ -3,6 +3,7 @@ package com.api.employeeapplication.controller;
 import java.util.List;
 import java.util.Optional;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,12 +26,16 @@ public class EmployeeController {
 		super();
 		this.employeeService = employeeService;
 	}
-	
-//	@GetMapping
-//	public List<Employee> getAllEmployees() {
-//
-//		return employeeService.getAllEmployees();
-//	}
+
+
+	@GetMapping("/")
+	@Operation(summary = "Returns a list of employees",
+			description = "A method to return list of employees to do something with."
+	)
+	public List<Employee> getAllEmployees() {
+
+		return employeeService.getAllEmployees();
+	}
 //
 //	@GetMapping("/{id}")
 //	public ResponseEntity<Employee> getEmployeeById(@PathVariable Long id) {
