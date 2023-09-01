@@ -14,7 +14,7 @@ import com.api.employeeapplication.service.EmployeeService;
 
 @RestController
 @RequestMapping("/employee")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200/")
 public class EmployeeController {
 	
 	@Autowired
@@ -26,41 +26,41 @@ public class EmployeeController {
 		this.employeeService = employeeService;
 	}
 	
-	@GetMapping
-	public List<Employee> getAllEmployees() {
-		
-		return employeeService.getAllEmployees();
-	}
-
-	@GetMapping("/{id}")
-	public ResponseEntity<Employee> getEmployeeById(@PathVariable Long id) {
-		Optional<Employee> emp = employeeService.findById(id);
-		return emp.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
-	}
-
-	@PostMapping
-	public Employee createEmployee(@RequestBody Employee employee) {
-		return employeeService.save(employee);
-	}
-
-	@PutMapping("/{id}")
-	public ResponseEntity<Employee> updateEmployee(@PathVariable Long id, @RequestBody Employee newEmployee) {
-		if (!employeeService.existsById(id)) {
-			return ResponseEntity.notFound().build();
-		}
-		newEmployee.setId(id);
-		Employee updatedEmployee = employeeService.save(newEmployee);
-		return ResponseEntity.ok(updatedEmployee);
-	}
-
-	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> deleteEmployee(@PathVariable Long id) {
-		if(!employeeService.existsById(id)) {
-			return ResponseEntity.notFound().build();
-		}
-
-		employeeService.deleteById(id);
-		return ResponseEntity.noContent().build();
-	}
+//	@GetMapping
+//	public List<Employee> getAllEmployees() {
+//
+//		return employeeService.getAllEmployees();
+//	}
+//
+//	@GetMapping("/{id}")
+//	public ResponseEntity<Employee> getEmployeeById(@PathVariable Long id) {
+//		Optional<Employee> emp = employeeService.findById(id);
+//		return emp.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+//	}
+//
+//	@PostMapping
+//	public Employee createEmployee(@RequestBody Employee employee) {
+//		return employeeService.save(employee);
+//	}
+//
+//	@PutMapping("/{id}")
+//	public ResponseEntity<Employee> updateEmployee(@PathVariable Long id, @RequestBody Employee newEmployee) {
+//		if (!employeeService.existsById(id)) {
+//			return ResponseEntity.notFound().build();
+//		}
+//		newEmployee.setId(id);
+//		Employee updatedEmployee = employeeService.save(newEmployee);
+//		return ResponseEntity.ok(updatedEmployee);
+//	}
+//
+//	@DeleteMapping("/{id}")
+//	public ResponseEntity<Void> deleteEmployee(@PathVariable Long id) {
+//		if(!employeeService.existsById(id)) {
+//			return ResponseEntity.notFound().build();
+//		}
+//
+//		employeeService.deleteById(id);
+//		return ResponseEntity.noContent().build();
+//	}
 
 }
