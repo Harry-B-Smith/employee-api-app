@@ -36,12 +36,15 @@ public class EmployeeController {
 
 		return employeeService.getAllEmployees();
 	}
-//
-//	@GetMapping("/{id}")
-//	public ResponseEntity<Employee> getEmployeeById(@PathVariable Long id) {
-//		Optional<Employee> emp = employeeService.findById(id);
-//		return emp.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
-//	}
+
+	@Operation(summary = "Find an employee by id",
+			description = "Finds an employee by id"
+	)
+	@GetMapping("/{id}")
+	public ResponseEntity<Employee> getEmployeeById(@PathVariable Long id) {
+		Optional<Employee> emp = employeeService.findById(id);
+		return emp.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+	}
 //
 //	@PostMapping
 //	public Employee createEmployee(@RequestBody Employee employee) {
